@@ -445,6 +445,8 @@ func (s *Client) call(ctx context.Context, soapAction string, request, response 
 		return err
 	}
 
+	fmt.Printf("👺 sending soap message:%s\n", buffer.String())
+
 	req, err := http.NewRequest("POST", s.url, buffer)
 	if err != nil {
 		return err
@@ -514,7 +516,7 @@ func (s *Client) call(ctx context.Context, soapAction string, request, response 
 	}
 
 	var mmaBoundary string
-	if s.opts.mma{
+	if s.opts.mma {
 		mmaBoundary, err = getMmaHeader(res.Header.Get("Content-Type"))
 		if err != nil {
 			return err
